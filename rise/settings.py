@@ -1,3 +1,4 @@
+from email.mime import base
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 import os
@@ -98,3 +99,7 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
