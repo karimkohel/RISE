@@ -1,2 +1,2 @@
 # RISE
-Reverse Image Search Engine 
+Reverse Image Search Engine (it's pronounced rice)
