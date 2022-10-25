@@ -1,15 +1,16 @@
 {% load static %}
+{% load widget_tweaks %}
 
 <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="img/hero.jpg">
     <form class="d-flex tm-search-form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!-- TODO : Django form object here -->
-        {{ form }}
+        {% render_field form.image_file class="form-control tm-search-input" %}
 
         <!-- <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search"> -->
         <button class="btn btn-outline-success tm-search-btn" type="submit">
-            <i class="fas fa-search"></i>
+            <i class="fa fa-file-image" aria-hidden="true"></i>
         </button> 
     </form>
 </div>
