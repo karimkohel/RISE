@@ -12,3 +12,6 @@ class Image(models.Model):
     title = models.CharField(max_length=250)
     type = models.CharField(max_length=50, choices=TypeChoices.choices, default=TypeChoices.QUERY)
     image_file = models.ImageField()
+
+    def __str__(self):
+        return self.title
