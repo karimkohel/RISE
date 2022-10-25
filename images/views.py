@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
 from .models import Image
-from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
+from .forms import ImageForm
 
-class ImageListView(ListView):
+class ImageListView(CreateView):
     model = Image
-    context_object_name = 'images'
-    paginate_by = 20
+    form_class = ImageForm
     template_name = 'images/index.html'
+    success_url = reverse_lazy("images:index")
 
-    # TODO: after implementing the search algorithm use it here
-    # def get_queryset(self):
-    #     return object_list
+    def get_context_data(self, **kwargs):
+        context = super(ImageListView, self).get_context_data(**kwargs)
+        context['images'] = self.model.objects.all()
+        return context
