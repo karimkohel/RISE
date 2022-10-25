@@ -11,5 +11,5 @@ class ImageListView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ImageListView, self).get_context_data(**kwargs)
-        context['images'] = self.model.objects.all()
+        context['images'] = self.model.objects.all()[:20]
         return context
