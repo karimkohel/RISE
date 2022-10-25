@@ -136,3 +136,4 @@ env.py
 config/*
 frontend/
 migrations/
+media/
