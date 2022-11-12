@@ -13,4 +13,12 @@ K=3
 
 ret, labels, centers = cv2.kmeans(imgFlat, K, None, criteria, 10, flags)
 centers = np.uint8(centers)
-print(centers)
+
+indexedImg = centers[[labels.flatten()]]
+indexedImg = indexedImg.reshape((img.shape))
+
+
+# showing
+cv2.imshow("img", indexedImg)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
