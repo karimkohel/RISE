@@ -15,4 +15,5 @@ class ImageListView(CreateView):
         # context['images'] = Image.objects.all()[:20]
         print(Image.objects.last().image_file)
         context['images'] = search("media/"+str(Image.objects.last().image_file), "indexing.csv", 20)
+        print(context['images'])
         return context

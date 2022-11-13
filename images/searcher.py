@@ -20,6 +20,7 @@ class Searcher:
                 # chi-squared distance between the features in our index
                 features = [float(x) for x in row[1:]]
                 d = self.chi2_distance(features, queryFeatures)
+                print(d)
 
                 results[row[0]] = d
             # close the reader
@@ -45,11 +46,11 @@ def search(queryLocation, indexPath, limit=10):
     searcher = Searcher(indexPath)
     results = searcher.search(features, limit)
 
-    results = []
-    for (score, resultID) in results:
-        results.append(resultID)
+    names = []
+    for (d, name) in results:
+        names.append(name)
 
-    return results
+    return names
 
 if __name__ == '__main__':
     search('test.jpg', 'indexing.csv', 1)
