@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 import imutils
 import glob
-from django.conf import settings
 
 class ColorDescriptor:
     def __init__(self, bins):
@@ -66,7 +65,7 @@ if __name__ == "__main__":
     cd = ColorDescriptor((8, 12, 3))
     output = open('indexing.csv', "w")
     # use glob to grab the image paths and loop over them
-    for imagePath in glob.glob(settings.BASE_DIR+"/database"+"/*.jpg"):
+    for imagePath in glob.glob("static/database/*.jpg"):
         # extract the image ID (i.e. the unique filename) from the image
         # path and load the image itself
         imageID = imagePath[imagePath.rfind("/") + 1:]

@@ -45,16 +45,11 @@ def search(queryLocation, indexPath, limit=10):
     searcher = Searcher(indexPath)
     results = searcher.search(features, limit)
 
-    cv2.imshow("Query", queryImg)
-
+    results = []
     for (score, resultID) in results:
-        print(score, resultID)
-	# load the result image and display it
-        result = cv2.imread(resultID)
-        cv2.imshow("Result", result)
+        results.append(resultID)
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    return results
 
 if __name__ == '__main__':
     search('test.jpg', 'indexing.csv', 1)

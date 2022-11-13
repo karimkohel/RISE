@@ -3,7 +3,6 @@ from .models import Image
 from django.views.generic.edit import CreateView
 from .forms import ImageForm
 from .searcher import search
-from django.conf import settings
 
 class ImageListView(CreateView):
     model = Image
@@ -13,7 +12,7 @@ class ImageListView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ImageListView, self).get_context_data(**kwargs)
-        context['images'] = Image.objects.all()[:20]
+        # context['images'] = Image.objects.all()[:20]
         print(Image.objects.last().image_file)
-        # context['images'] = search(ImageForm.cleaned_data[], "indexing.csv", 20)
+        context['images'] = search("media/"+str(Image.objects.last().image_file), "indexing.csv", 20)
         return context
