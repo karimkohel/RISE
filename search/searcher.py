@@ -37,23 +37,24 @@ class Searcher:
         return d
 
 
-def search(queryLocation, indexPath, limit):
+def search(queryLocation, indexPath, limit=10):
     cd = ColorDescriptor((8, 12, 3))
     queryImg = cv2.imread(queryLocation)
     features = cd.describe(queryImg)
 
     searcher = Searcher(indexPath)
-    results = searcher.search(features)
+    results = searcher.search(features, limit)
 
     cv2.imshow("Query", queryImg)
 
     for (score, resultID) in results:
+        print(score, resultID)
 	# load the result image and display it
-        result = cv2.imread('img' + "/" + resultID)
+        result = cv2.imread(resultID)
         cv2.imshow("Result", result)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    search()
+    search('test.jpg', 'indexing.csv', 1)
