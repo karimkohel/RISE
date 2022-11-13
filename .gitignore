@@ -137,3 +137,4 @@ config/*
 frontend/
 migrations/
 media/
+*.jpg
