@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import imutils
+import glob
 
 class ColorDescriptor:
     def __init__(self, bins):
@@ -61,4 +62,18 @@ class ColorDescriptor:
 
 
 if __name__ == "__main__":
-    pass
+    cd = ColorDescriptor((8, 12, 3))
+    output = open('indexing.csv', "w")
+    # use glob to grab the image paths and loop over them
+    for imagePath in glob.glob("img" + "/*.jpg"):
+        # extract the image ID (i.e. the unique filename) from the image
+        # path and load the image itself
+        imageID = imagePath[imagePath.rfind("/") + 1:]
+        image = cv2.imread(imagePath)
+        # describe the image
+        features = cd.describe(image)
+        # write the features to file
+        features = [str(f) for f in features]
+        output.write("%s,%s\n" % (imageID, ",".join(features)))
+    # close the index file
+    output.close()
