@@ -1,5 +1,8 @@
 import numpy as np
 import csv
+import cv2
+from pyimagesearch_indexer import ColorDescriptor
+
 
 class Searcher:
     def __init__(self, indexPath):
@@ -32,3 +35,25 @@ class Searcher:
 		# compute the chi-squared distance
         d = 0.5 * np.sum([((a - b) ** 2) / (a + b + eps) for (a, b) in zip(histA, histB)])
         return d
+
+
+def search(queryLocation, indexPath, limit):
+    cd = ColorDescriptor((8, 12, 3))
+    queryImg = cv2.imread(queryLocation)
+    features = cd.describe(queryImg)
+
+    searcher = Searcher(indexPath)
+    results = searcher.search(features)
+
+    cv2.imshow("Query", queryImg)
+
+    for (score, resultID) in results:
+	# load the result image and display it
+        result = cv2.imread('img' + "/" + resultID)
+        cv2.imshow("Result", result)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+if __name__ == '__main__':
+    search()
