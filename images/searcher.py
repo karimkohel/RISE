@@ -1,7 +1,7 @@
 import numpy as np
 import csv
 import cv2
-from .pyimagesearch_indexer import ColorDescriptor
+from .pyimagesearch_indexer import ImageDescriptor
 
 
 class Searcher:
@@ -39,9 +39,9 @@ class Searcher:
 
 
 def search(queryLocation, indexPath, limit=10):
-    cd = ColorDescriptor((8, 12, 3))
+    iDesc = ImageDescriptor((8, 12, 3))
     queryImg = cv2.imread(queryLocation)
-    features = cd.describe(queryImg)
+    features = iDesc.describe(queryImg)
 
     searcher = Searcher(indexPath)
     results = searcher.search(features, limit)
