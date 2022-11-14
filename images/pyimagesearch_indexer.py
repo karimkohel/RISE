@@ -11,7 +11,17 @@ class ImageDescriptor:
         # convert the image to the HSV color space and initialize
         # the features used to quantify the image
         image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        imgGray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         features = []
+
+        # apply sift and get features
+        # sift = cv2.SIFT_create()
+        # keyPoints, descriptor = sift.detectAndCompute(imgGray, None)
+
+        # features.extend(descriptor)
+        # print(descriptor)
+
+
         # grab the dimensions and compute the center of the image
         (h, w) = image.shape[:2]
         (cX, cY) = (int(w * 0.5), int(h * 0.5))
@@ -75,5 +85,6 @@ if __name__ == "__main__":
         # write the features to file
         features = [str(f) for f in features]
         output.write("%s,%s\n" % (imageID, ",".join(features)))
+        # break
     # close the index file
     output.close()
