@@ -20,7 +20,6 @@ class Searcher:
                 # chi-squared distance between the features in our index
                 features = [float(x) for x in row[1:]]
                 d = self.chi2_distance(features, queryFeatures)
-                print(d)
 
                 results[row[0]] = d
             # close the reader
