@@ -15,12 +15,14 @@ class ImageDescriptor:
         features = []
 
         # apply sift and get features
-        # sift = cv2.SIFT_create()
-        # keyPoints, descriptor = sift.detectAndCompute(imgGray, None)
-
-        # features.extend(descriptor)
-        # print(descriptor)
-
+        sift = cv2.SIFT_create(20)
+        try:
+            keyPoints, descriptors = sift.detectAndCompute(imgGray, None)
+            for desc in descriptors:
+                features.extend(desc)
+        except TypeError:
+            # if image has no blobs i guess ?
+            return None
 
         # grab the dimensions and compute the center of the image
         (h, w) = image.shape[:2]
@@ -81,7 +83,10 @@ if __name__ == "__main__":
         imageID = imagePath[imagePath.rfind("/") + 1:]
         image = cv2.imread(imagePath)
         # describe the image
+        print(f"Describing image: {imagePath}")
         features = iDesc.describe(image)
+        if not features:
+            continue
         # write the features to file
         features = [str(f) for f in features]
         output.write("%s,%s\n" % (imageID, ",".join(features)))
