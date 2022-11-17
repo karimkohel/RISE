@@ -38,7 +38,7 @@ class Searcher:
 
 
 def search(queryLocation, indexPath, limit=10):
-    iDesc = ImageDescriptor((8, 12, 3))
+    iDesc = ImageDescriptor()
     queryImg = cv2.imread(queryLocation)
     features = iDesc.describe(queryImg)
 
